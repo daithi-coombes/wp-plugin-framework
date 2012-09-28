@@ -1,6 +1,6 @@
 <?php
-namespace PluginFramework;
-use PluginFramework\Modules;
+namespace CityIndex\WP\Login;
+use CityIndex\WP\Login\Modules;
 
 /**
  * Configuration Class.
@@ -10,7 +10,8 @@ use PluginFramework\Modules;
  *  - Registers 3rd party scripts and styles
  * 
  * @author daithi
- * @package ci-groups 
+ * @package cityindex
+ * @subpackage ci-wp-login
  */
 class Config{
 	
@@ -29,6 +30,8 @@ class Config{
 	public $modal_tables = array();
 	/** @var string The plugin prefix to append to db tables */
 	public $modal_prefix = false;
+	/** @var array An array to be stored as wp_options */
+	public $options = array();
 	/** @var array Associative array of 3rd party scripts to register */
 	public $third_party = array('scripts','styles');
 	/** @var string The directory of the plugin base */
@@ -42,6 +45,8 @@ class Config{
 	 * @global wpdb The wordpress database class. 
 	 */
 	function __construct(){
+		
+		global $wpdb;
 		
 		//default fields
 		$this->plugin_dir = WP_PLUGIN_DIR . "/" . basename(dirname(dirname( __FILE__ )));
@@ -61,14 +66,14 @@ class Config{
 		//debug?
 		if($this->debug) $this->set_debug();
 		
-		//load controller
-		//$foo = new Controller();
-		
 		//register activation hooks
 		register_activation_hook( "{$this->plugin_dir}/index.php", array(&$this, 'activate'));
 		
 		//register 3rd parties
 		$this->register_3rd_parties();
+		
+		//set options
+		$this->get_options();
 		
 		//load modules
 		$this->load_modules();
@@ -98,9 +103,33 @@ class Config{
 	 *
 	 * @see Config::errors
 	 * @param string $err The error string to report
+	 * @return false
 	 */
 	public function error( $err ){
 		$this->errors[] = $err;
+		return false;
+	}
+	
+	/**
+	 * Get the site options for this plugin.
+	 *
+	 * @return object->array 
+	 */
+	public function get_options(){
+		$option = str_replace("\\", "_", __NAMESPACE__) . "_options";
+		return $this->options = get_site_option($option);
+	}
+	
+	/**
+	 * Add message to the messages array
+	 * 
+	 * @see Config::messages
+	 * @param string $msg The message to add
+	 * @return true
+	 */
+	public function message( $msg ){
+		$this->messages[] = $msg;
+		return true;
 	}
 	
 	/**
@@ -118,12 +147,24 @@ class Config{
 	}
 	
 	/**
-	 * Loads modules set to construct on plugin init().
+	 * Set a plugin option.
 	 * 
-	 * Reads ClassNames from $this->init_modules() array.
+	 * @param string $key The option key
+	 * @param string $val The option value
+	 */
+	public function set_option($key, $val){
+		$this->options[$key] = $val;
+		$this->set_options();
+	}
+	
+	/**
+	 * Construct default modules needed for plugin init().
+	 * 
+	 * Reads ClassNames from $this->init_modules() array and creates a global
+	 * variable with the same name as the class name.
 	 * 
 	 * @see Config::init_modules
-	 * @return type 
+	 * @return void
 	 */
 	private function load_modules(){
 		
@@ -131,7 +172,8 @@ class Config{
 		
 		foreach($this->init_modules as $module){
 			$class = __NAMESPACE__ . "\\Modules\\$module";
-			$netadmin = new $class();
+			global ${$module};
+			${$module} = new $class();
 		}
 	}
 	
@@ -155,5 +197,15 @@ class Config{
 				wp_register_style($handle, "{$this->plugin_url}/application/includes/{$src}");
 	}
 	
+	/**
+	 * Sets the options for this plugin.
+	 * 
+	 * @uses update_option()
+	 * @return void
+	 */
+	private function set_options(){
+		$option = str_replace("\\", "_", __NAMESPACE__) . "_options";
+		update_site_option($option, $this->options);
+	}
 }
 ?>

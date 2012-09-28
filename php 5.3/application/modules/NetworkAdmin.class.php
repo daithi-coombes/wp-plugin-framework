@@ -6,7 +6,7 @@ class NetworkAdmin extends Controller{
 	
 	function __construct(){
 		
-		$this->action_wp = array(
+		$this->wp_action = array(
 			'network_admin_menu' => array(&$this, 'admin_menu')
 		);
 		

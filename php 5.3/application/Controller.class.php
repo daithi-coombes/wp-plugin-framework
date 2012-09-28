@@ -1,5 +1,5 @@
 <?php
-namespace PluginFramework;
+namespace CityIndex\WP\Login;
 
 /**
  * Class is extended by plugin modules.
@@ -7,7 +7,8 @@ namespace PluginFramework;
  * Handles writing to the database and displaying the view file.
  * 
  * @author daithi
- * @package ci-groups
+ * @package cityindex
+ * @subpackage ci-wp-login
  */
 class Controller{
 	
@@ -15,8 +16,6 @@ class Controller{
 	 * in child class.
 	 */
 	public $action = false;
-	/** @var array An associative array of wordpress actions and callbacks */
-	public $action_wp = array();
 	/** @var array The configuration struct defined in plugin index.php file */
 	public $config = array();
 	/** @var array Array of js dependencies called in child class */
@@ -25,6 +24,10 @@ class Controller{
 	public $shortcodes = array();
 	/** @var array Array of css dependencies called in child class */
 	public $style_deps = array();
+	/** @var array An associative array of wordpress actions and callbacks */
+	public $wp_action = array();
+	/** @var array An associative array of wordpress filters and callbacks */
+	public $wp_filter = array();
 	/** @var string lowercase child class name */
 	private $class = false;
 	/** @var string Camel case child class name */
@@ -56,6 +59,7 @@ class Controller{
 		//default methods
 		$this->do_action();
 		$this->set_wp_actions();
+		$this->set_wp_filters();
 	}
 
 	/**
@@ -68,7 +72,7 @@ class Controller{
 		require_once( ABSPATH . '/wp-admin/includes/upgrade.php');
 		
 		/**
-		 *CREATE TABLE IF NOT EXISTS `wp_PluginFramework_WP_Groups_Group` (
+		 *CREATE TABLE IF NOT EXISTS `wp_CityIndex\WP\Login_WP_Groups_Group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) COLLATE utf8_bin NOT NULL,
   `description` text COLLATE utf8_bin NOT NULL,
@@ -83,6 +87,16 @@ class Controller{
 				. ");";
 			dbDelta($sql);
 		}
+	}
+	
+	/**
+	 * Creates nonces for the view file.
+	 * 
+	 * @see Controller::set_shortcodes()
+	 * @return string
+	 */
+	public function create_nonce( $arr ){
+		return wp_create_nonce($arr[0]);
 	}
 	
 	/**
@@ -123,7 +137,7 @@ class Controller{
 	public function do_action(){
 		$action = $this->action;
 		if(method_exists($this, $action))
-			$this->$action();
+			add_action('init', array($this, $action));
 	}
 	
 	/**
@@ -143,6 +157,7 @@ class Controller{
 		$this->html = preg_replace("/<\?php.+\?>/msU", "", $this->html);
 		
 		$this->shortcodes['errors'] = $this->get_errors();
+		$this->shortcodes['messages'] = $this->get_messages();
 		
 		$this->set_shortcodes();
 		$this->load_scripts();
@@ -158,12 +173,34 @@ class Controller{
 	 */
 	private function get_errors(){
 		
-		$ret = "<ul>\n";
+		$html = "<div id=\"message\" class=\"error\"><ul>\n";
+		$errors = $this->config->errors;
+
+		if(@$_REQUEST['error'])
+			$errors[] = $_REQUEST['error'];
+
+		if(!count($errors)) return false;
+		foreach($errors as $err)
+			$html .= stripslashes ("<li>{$err}</li>\n");
+
+		//wp_enqueue_style('colors');
+		return $html .= "</ul>\n</div>\n";
+	}
+	
+	private function get_messages(){
 		
-		if(!count($this->config->errors)) return "";
-		foreach($this->config->errors as $err)
-			$ret .= "<li>{$err}</li>\n";
-		return $ret .= "</ul>\n";
+		$html = "<div id=\"message\" class=\"message\"><ul>\n";
+		$messages = $this->config->messages;
+
+		if(@$_REQUEST['message'])
+			$messages[] = $_REQUEST['message'];
+
+		if(!count($messages)) return false;
+		foreach($messages as $msg)
+			$html .= stripslashes ("<li>{$msg}</li>\n");
+
+		//wp_enqueue_style('colors');
+		return $html .= "</ul>\n</div>\n";
 	}
 	
 	/**
@@ -176,8 +213,24 @@ class Controller{
 	 */
 	private function set_wp_actions(){
 		
-		if(!count($this->action_wp)) return;
-		foreach($this->action_wp as $action=>$call){
+		if(!count($this->wp_action)) return;
+		foreach($this->wp_action as $action=>$call){
+			add_action($action, $call);
+		}
+	}
+	
+	/**
+	 * Registers action calls with wp core.
+	 * 
+	 * Loops through $this->action_wp array, takes the key as the action and the
+	 * value as the callback.
+	 * 
+	 * @return void
+	 */
+	private function set_wp_filters(){
+		
+		if(!count($this->wp_filter)) return;
+		foreach($this->wp_filter as $action=>$call){
 			add_action($action, $call);
 		}
 	}
@@ -225,8 +278,10 @@ class Controller{
 			
 				//if val is method call
 				if(is_array($val)){
-					$method = $val[0];
-					$val = $this->$method();
+					$method = array_shift($val);
+					if(method_exists($this, $method))
+						$val = $this->$method( $val );
+					else $val = "unkown shortcode";
 				}
 				$this->html = str_replace("<!--[--{$code}--]-->", $val, $this->html);
 			}
