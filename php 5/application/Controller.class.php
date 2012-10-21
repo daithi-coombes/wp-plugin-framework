@@ -197,7 +197,7 @@ if(!class_exists("WPPluginFrameWorkController")):
 			foreach($errors as $err)
 				$html .= stripslashes ("<li>{$err}</li>\n");
 
-			//wp_enqueue_style('colors');
+			wp_enqueue_style('colors');
 			return $html .= "</ul>\n</div>\n";
 		}
 
@@ -208,7 +208,7 @@ if(!class_exists("WPPluginFrameWorkController")):
 		 */
 		private function get_messages(){
 
-			$html = "<div id=\"message\" class=\"message\"><ul>\n";
+			$html = "<div id=\"message\" class=\"message updated\"><ul>\n";
 			$messages = $this->config->messages;
 
 			if(@$_REQUEST['message'])
@@ -218,7 +218,7 @@ if(!class_exists("WPPluginFrameWorkController")):
 			foreach($messages as $msg)
 				$html .= stripslashes ("<li>{$msg}</li>\n");
 
-			//wp_enqueue_style('colors');
+			wp_enqueue_style('colors');
 			return $html .= "</ul>\n</div>\n";
 		}
 
