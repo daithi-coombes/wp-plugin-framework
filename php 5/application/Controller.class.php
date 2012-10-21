@@ -170,6 +170,17 @@ if(!class_exists("WPPluginFrameWorkController")):
 		}
 
 		/**
+		 * Add message to config messages array.
+		 * 
+		 * @param string $msg The message to add.
+		 * @return true Always returns true. 
+		 */
+		public function message($msg){
+			$this->config->messages[] = $msg;
+			return true;
+		}
+		
+		/**
 		* Return html list of errors reported by plugin globally.
 		* 
 		* @return string Returns an html <ul> list of errors.
@@ -190,6 +201,11 @@ if(!class_exists("WPPluginFrameWorkController")):
 			return $html .= "</ul>\n</div>\n";
 		}
 
+		/**
+		 * Return html list of messages reported by plugin globally.
+		 * 
+		 * @return string Returns an html ul list of messages. 
+		 */
 		private function get_messages(){
 
 			$html = "<div id=\"message\" class=\"message\"><ul>\n";
