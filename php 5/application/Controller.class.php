@@ -106,7 +106,7 @@ if(!class_exists("WPPluginFrameWorkController")):
 		* @return boolean false Method always returns false.
 		*/
 		public function error( $err ){
-			$this->errors[] = $err;
+			$this->config->errors[] = $err;
 			return false;
 		}
 
@@ -120,13 +120,16 @@ if(!class_exists("WPPluginFrameWorkController")):
 		* @param boolean $json Default True. Whether to return json error or plain
 		* text.
 		*/
-		public function check_nonce($action, $json=true){
+		public function check_nonce($action, $json=false){
 			if(!wp_verify_nonce($_REQUEST['_wpnonce'], $action)){
 				if($json){
 					print json_encode(array('error' => 'invalid nonce'));
 					die();
 				}
-				else die("invalid nonce");
+				else{
+					$this->error("Invalid Nonce");
+					return false;
+				}
 			}
 			return true;
 		}
@@ -172,10 +175,10 @@ if(!class_exists("WPPluginFrameWorkController")):
 		* @return string Returns an html <ul> list of errors.
 		*/
 		private function get_errors(){
-
+			
 			$html = "<div id=\"message\" class=\"error\"><ul>\n";
 			$errors = $this->config->errors;
-
+			
 			if(@$_REQUEST['error'])
 				$errors[] = $_REQUEST['error'];
 
@@ -277,6 +280,9 @@ if(!class_exists("WPPluginFrameWorkController")):
 		*/
 		private function set_shortcodes() {
 
+			$this->shortcodes['errors'] = $this->get_errors();
+			$this->shortcodes['messages'] = $this->get_messages();
+			
 			//replace values
 			if(count(@$this->shortcodes))
 				foreach ($this->shortcodes as $code => $val){
