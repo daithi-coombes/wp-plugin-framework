@@ -8,6 +8,10 @@ if(!class_exists("WPPluginFrameWorkConfig")):
 
 		/** @var string The key name for looking for action requests */
 		public $action_key = false;
+		/** @var string Name of activation function declared in plugin index */
+		public $activation_function = false;
+		/** @var string Name of the deactivation function declared in plugin index */
+		public $deactivation_function = false;
 		/** @var boolean Print debug messages to stdout */
 		public $debug = false;
 		/** @var array An array of errors. Used in the global $controller object */
@@ -56,7 +60,8 @@ if(!class_exists("WPPluginFrameWorkConfig")):
 			$this->modal_prefix = $wpdb->prefix . $this->namespace;
 
 			//register activation hooks
-			register_activation_hook( "{$this->plugin_dir}/index.php", array(&$this, 'activate'));
+			//register_activation_hook( "{$this->plugin_dir}/index.php", array(&$this, 'activate'));
+			register_deactivation_hook("{$this->plugin_dir}/index.php", $this->deactivation_function);
 			
 			//register 3rd parties
 			$this->register_3rd_parties();
@@ -77,7 +82,14 @@ if(!class_exists("WPPluginFrameWorkConfig")):
 		public function activate(){
 
 			require_once( ABSPATH . '/wp-admin/includes/upgrade.php');
+			
+			//see if activation code is set
+			if($this->activation_function){
+				$func = $this->activation_function;
+				$func();
+			}
 
+			//create tables
 			foreach($this->modal_tables as $table => $fields){
 				$sql = "
 					CREATE TABLE IF NOT EXISTS `{$this->modal_prefix}_{$table}`("
