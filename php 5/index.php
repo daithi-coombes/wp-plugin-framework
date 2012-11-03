@@ -40,6 +40,10 @@ $config->init_modules = array(
 	'NetworkAdmin',
 	'Dashboard'
 );
+$config->options = array(
+	'this is option 1',
+	'option 2'
+);
 $config->plugin_dir = $PLUGIN_DIR;
 $config->plugin_url = $PLUGIN_URL;
 $config->build();

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.7.0" />
+
+	<title>Class JavaScriptPacker</title>
+
+	<script type="text/javascript" src="resources/combined.js?2398159053"></script>
+	<script type="text/javascript" src="elementlist.js?471302591"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1567499433" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Packages</h3>
+			<ul>
+				<li><a href="package-cityindex.html">cityindex<span></span></a>
+						<ul>
+				<li><a href="package-cityindex.ci.wp.login.html">ci-wp-login</a>
+						</li>
+							</ul></li>
+				<li><a href="package-david.coombes.html">david-coombes</a>
+						</li>
+				<li class="active"><a href="package-None.html">None</a>
+						</li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Dashboard.html">Dashboard</a></li>
+				<li class="active"><a href="class-JavaScriptPacker.html">JavaScriptPacker</a></li>
+				<li><a href="class-NetworkAdmin.html">NetworkAdmin</a></li>
+				<li><a href="class-ParseMaster.html">ParseMaster</a></li>
+				<li><a href="class-WPPluginFrameWorkConfig.html">WPPluginFrameWorkConfig</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="package-None.html" title="Summary of None"><span>Package</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+			<li>
+				<a href="todo.html" title="Todo list"><span>Todo</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class JavaScriptPacker</h1>
+
+
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		
+		
+
+		<b>Located at</b> <a href="source-class-JavaScriptPacker.html#69" title="Go to source code">includes/class.JavaScriptPacker.php</a><br />
+	</div>
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-JavaScriptPacker.html#86" title="Go to source code">__construct</a>( <span> <var>$_script</var></span>, <span> <var>$_encoding</var> = <span class="php-num">62</span></span>, <span> <var>$_fastDecode</var> = <span class="php-keyword1">true</span></span>, <span> <var>$_specialChars</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="pack" id="_pack">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_pack">#</a>
+		<code><a href="source-class-JavaScriptPacker.html#96" title="Go to source code">pack</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+	<table class="summary" id="constants">
+	<caption>Constants summary</caption>
+	<tr data-order="IGNORE" id="IGNORE">
+
+		<td class="attributes"><code>
+			string
+		</code></td>
+		<td class="name"><code>
+				<a href="source-class-JavaScriptPacker.html#71" title="Go to source code"><b>IGNORE</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'$1'</span></code></td>
+		<td class="description"><div>
+			<a href="#IGNORE" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="JSFUNCTION_unpack" id="JSFUNCTION_unpack">
+
+		<td class="attributes"><code>
+			string
+		</code></td>
+		<td class="name"><code>
+				<a href="source-class-JavaScriptPacker.html#455" title="Go to source code"><b>JSFUNCTION_unpack</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'function($packed, $ascii, $count, $keywords, $encode, $decode) {
+while ($count--) {
+    if ($keywords[$count]) {
+        $packed = $packed.replace(new RegExp(\'\\\\b\' + $encode($count) + \'\\\\b\', \'g\'), $keywords[$count]);
+    }
+}
+return $packed;
+}'</span></code></td>
+		<td class="description"><div>
+			<a href="#JSFUNCTION_unpack" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="JSFUNCTION_decodeBody" id="JSFUNCTION_decodeBody">
+
+		<td class="attributes"><code>
+			string
+		</code></td>
+		<td class="name"><code>
+				<a href="source-class-JavaScriptPacker.html#475" title="Go to source code"><b>JSFUNCTION_decodeBody</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'    if (!\'\'.replace(/^/, String)) {
+    // decode all the values we need
+    while ($count--) {
+        $decode[$encode($count)] = $keywords[$count] || $encode($count);
+    }
+    // global replacement function
+    $keywords = [function ($encoded) {return $decode[$encoded]}];
+    // generic match
+    $encode = function () {return \'\\\\w+\'};
+    // reset the loop counter -  we are now doing a global replace
+    $count = 1;
+}
+'</span></code></td>
+		<td class="description"><div>
+			<a href="#JSFUNCTION_decodeBody" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="JSFUNCTION_encode10" id="JSFUNCTION_encode10">
+
+		<td class="attributes"><code>
+			string
+		</code></td>
+		<td class="name"><code>
+				<a href="source-class-JavaScriptPacker.html#509" title="Go to source code"><b>JSFUNCTION_encode10</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'function($charCode) {
+return $charCode;
+}'</span></code></td>
+		<td class="description"><div>
+			<a href="#JSFUNCTION_encode10" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="JSFUNCTION_encode36" id="JSFUNCTION_encode36">
+
+		<td class="attributes"><code>
+			string
+		</code></td>
+		<td class="name"><code>
+				<a href="source-class-JavaScriptPacker.html#516" title="Go to source code"><b>JSFUNCTION_encode36</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'function($charCode) {
+return $charCode.toString(36);
+}'</span></code></td>
+		<td class="description"><div>
+			<a href="#JSFUNCTION_encode36" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="JSFUNCTION_encode62" id="JSFUNCTION_encode62">
+
+		<td class="attributes"><code>
+			string
+		</code></td>
+		<td class="name"><code>
+				<a href="source-class-JavaScriptPacker.html#523" title="Go to source code"><b>JSFUNCTION_encode62</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'function($charCode) {
+return ($charCode &lt; _encoding ? \'\' : arguments.callee(parseInt($charCode / _encoding))) +
+(($charCode = $charCode % _encoding) &gt; 35 ? String.fromCharCode($charCode + 29) : $charCode.toString(36));
+}'</span></code></td>
+		<td class="description"><div>
+			<a href="#JSFUNCTION_encode62" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="JSFUNCTION_encode95" id="JSFUNCTION_encode95">
+
+		<td class="attributes"><code>
+			string
+		</code></td>
+		<td class="name"><code>
+				<a href="source-class-JavaScriptPacker.html#531" title="Go to source code"><b>JSFUNCTION_encode95</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'function($charCode) {
+return ($charCode &lt; _encoding ? \'\' : arguments.callee($charCode / _encoding)) +
+    String.fromCharCode($charCode % _encoding + 161);
+}'</span></code></td>
+		<td class="description"><div>
+			<a href="#JSFUNCTION_encode95" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen 2.7.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

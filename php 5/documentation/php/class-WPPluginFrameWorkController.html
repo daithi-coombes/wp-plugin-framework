@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.7.0" />
+
+	<title>Class WPPluginFrameWorkController</title>
+
+	<script type="text/javascript" src="resources/combined.js?2398159053"></script>
+	<script type="text/javascript" src="elementlist.js?471302591"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1567499433" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Packages</h3>
+			<ul>
+				<li class="active"><a href="package-cityindex.html">cityindex<span></span></a>
+						<ul>
+				<li class="active"><a href="package-cityindex.ci.wp.login.html">ci-wp-login</a>
+						</li>
+							</ul></li>
+				<li><a href="package-david.coombes.html">david-coombes</a>
+						</li>
+				<li><a href="package-None.html">None</a>
+						</li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li class="active"><a href="class-WPPluginFrameWorkController.html">WPPluginFrameWorkController</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="package-cityindex.ci.wp.login.html" title="Summary of cityindex\ci-wp-login"><span>Package</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+			<li>
+				<a href="todo.html" title="Todo list"><span>Todo</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class WPPluginFrameWorkController</h1>
+
+
+	<div class="description">
+	
+<p>Plugin modules that want to make use of the framework methods should extend
+this class.</p>
+
+<p>The purpose of this framework is allow the easy creation of plugins for
+wordpress by simply dropping in a class and modulising your project. The
+index.php file acts as a bootstrap using the</p>
+
+	</div>
+
+
+
+	<div>
+		<h4>Direct known subclasses</h4>
+			<a href="class-Dashboard.html">Dashboard</a>, 
+			<a href="class-NetworkAdmin.html">NetworkAdmin</a>
+	</div>
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		
+		<b>Package:</b> <a href="package-cityindex.html">cityindex</a>\<a href="package-cityindex.ci.wp.login.html">ci-wp-login</a><br />
+
+				<b>Author:</b>
+				daithi<br />
+				<b>See:</b>
+				WPPluginFrameWorkConfig class By modulising your plugin, then creating a module class file and extending @see WPPluginFrameWorkConfig
+class it will be easier to access front and admin functionality. Using a nameing
+scheme and giving view files, javascript and css files the same name they are automatically hooked up to your
+class. By keeping the framework as a wrapper around your plugin this allows your
+code to be in full control only use what you need from the framework.
+----------- JavaScripts ----------- The class will automatically try to load:
+public_html/js/${module}.js by default. If this is not there then it will try to
+load: public_html/js/${module}.min.js 3rd party scrips are registered using the
+config class in the index.php file to allow registering of 3rd party scripts
+plugin wide. To register a 3rd party script use:
+$config-&gt;third_party['scripts'] = array( handle=&gt;src ) Dependencies can be
+loaded by the child class in the __construct like so: $this-&gt;scripts = array(
+'jquery' );<br />
+				<b>See:</b>
+				WPPluginFrameWorkController::load_scripts()<br />
+				<b>See:</b>
+				WPPluginFrameWorkConfig::register_3rd_parties()
+----------------------------------------------------<br />
+		<b>Located at</b> <a href="source-class-WPPluginFrameWorkController.html#4" title="Go to source code">Controller.class.php</a><br />
+	</div>
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-WPPluginFrameWorkController.html#71" title="Go to source code">__construct</a>( <span>string <var>$class</var> = <span class="php-keyword1">false</span> </span> )</code>
+
+		<div class="description short">
+			
+<p>Construct controller.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Construct controller.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$class</var></dt>
+					<dd><code>string</code><br> The class name being extended</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="activate" id="_activate">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_activate">#</a>
+		<code><a href="source-class-WPPluginFrameWorkController.html#98" title="Go to source code">activate</a>( )</code>
+
+		<div class="description short">
+			
+<p>Activation callback.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Activation callback.</p>
+
+<p>Installs tables</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="create_nonce" id="_create_nonce">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_create_nonce">#</a>
+		<code><a href="source-class-WPPluginFrameWorkController.html#125" title="Go to source code">create_nonce</a>( <span> <var>$arr</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Creates nonces for the view file.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Creates nonces for the view file.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						Controller::set_shortcodes()<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="error" id="_error">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_error">#</a>
+		<code><a href="source-class-WPPluginFrameWorkController.html#135" title="Go to source code">error</a>( <span>string <var>$err</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Log an error.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Log an error.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$err</var></dt>
+					<dd><code>string</code><br> The error message.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>false Method always returns false.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="check_nonce" id="_check_nonce">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_check_nonce">#</a>
+		<code><a href="source-class-WPPluginFrameWorkController.html#146" title="Go to source code">check_nonce</a>( <span>string <var>$action</var></span>, <span>boolean <var>$json</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Checks $_REQUEST[_wpnonce] against the param $action.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Checks $_REQUEST[_wpnonce] against the param $action.</p>
+
+<p>Will die() if verification fails.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$action</var></dt>
+					<dd><code>string</code><br> The action word used setting up the nonce.</dd>
+					<dt><var>$json</var></dt>
+					<dd><code>boolean</code><br> Default True. Whether to return json error or plain text.</dd>
+				</dl></div>
+
+
+
+				<h4>See</h4>
+				<div class="list">
+						wp_verify_nonce()<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="do_action" id="_do_action">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_do_action">#</a>
+		<code><a href="source-class-WPPluginFrameWorkController.html#170" title="Go to source code">do_action</a>( )</code>
+
+		<div class="description short">
+			
+<p>Looks for an action method to call in child class.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Looks for an action method to call in child class.</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="get_page" id="_get_page">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_get_page">#</a>
+		<code><a href="source-class-WPPluginFrameWorkController.html#179" title="Go to source code">get_page</a>( )</code>
+
+		<div class="description short">
+			
+<p>Prints the view html.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Prints the view html.</p>
+
+<p>Loads the html then sets shortcodes,loads scripts and styles then prints
+html.</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="message" id="_message">
+
+		<td class="attributes"><code>
+			 public 
+			true
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_message">#</a>
+		<code><a href="source-class-WPPluginFrameWorkController.html#205" title="Go to source code">message</a>( <span>string <var>$msg</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Add message to config messages array.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Add message to config messages array.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$msg</var></dt>
+					<dd><code>string</code><br> The message to add.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>true</code><br>Always returns true.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="load_styles" id="_load_styles">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_load_styles">#</a>
+		<code><a href="source-class-WPPluginFrameWorkController.html#318" title="Go to source code">load_styles</a>( )</code>
+
+		<div class="description short">
+			
+<p>Loads css files</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Loads css files</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="action" id="$action">
+
+		<td class="attributes"><code>
+			public 
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-WPPluginFrameWorkController.html#48" title="Go to source code"><var>$action</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">false</span></code></td>
+		<td class="description"><div>
+			<a href="#$action" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Holds actions from $_REQUEST[$action_key] for calling method in child
+class.</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Holds actions from $_REQUEST[$action_key] for calling method in child
+class.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="config" id="$config">
+
+		<td class="attributes"><code>
+			public 
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-WPPluginFrameWorkController.html#52" title="Go to source code"><var>$config</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$config" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The configuration struct defined in plugin index.php file</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The configuration struct defined in plugin index.php file</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="script_deps" id="$script_deps">
+
+		<td class="attributes"><code>
+			public 
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-WPPluginFrameWorkController.html#54" title="Go to source code"><var>$script_deps</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$script_deps" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Array of js dependencies called in child class</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Array of js dependencies called in child class</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="shortcodes" id="$shortcodes">
+
+		<td class="attributes"><code>
+			public 
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-WPPluginFrameWorkController.html#56" title="Go to source code"><var>$shortcodes</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$shortcodes" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Associative array of shortcode=&gt;value pairs</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Associative array of shortcode=&gt;value pairs</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="style_deps" id="$style_deps">
+
+		<td class="attributes"><code>
+			public 
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-WPPluginFrameWorkController.html#58" title="Go to source code"><var>$style_deps</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$style_deps" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Array of css dependencies called in child class</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Array of css dependencies called in child class</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="wp_action" id="$wp_action">
+
+		<td class="attributes"><code>
+			public 
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-WPPluginFrameWorkController.html#60" title="Go to source code"><var>$wp_action</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$wp_action" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>An associative array of wordpress actions and callbacks</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>An associative array of wordpress actions and callbacks</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="wp_filter" id="$wp_filter">
+
+		<td class="attributes"><code>
+			public 
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-WPPluginFrameWorkController.html#62" title="Go to source code"><var>$wp_filter</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$wp_filter" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>An associative array of wordpress filters and callbacks</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>An associative array of wordpress filters and callbacks</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen 2.7.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>
