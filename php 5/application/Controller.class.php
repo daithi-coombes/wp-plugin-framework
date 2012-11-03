@@ -2,13 +2,46 @@
 
 if(!class_exists("WPPluginFrameWorkController")):
 	/**
-	* Class is extended by plugin modules.
-	* 
-	* Handles writing to the database and displaying the view file.
-	* 
-	* @author daithi
-	* @package cityindex
-	* @subpackage ci-wp-login
+	 * Plugin modules that want to make use of the framework methods should
+	 * extend this class.
+	 * 
+	 * The purpose of this framework is allow the easy creation of plugins for
+	 * wordpress by simply dropping in a class and modulising your project. The 
+	 * index.php file acts as a bootstrap using the
+	 * @see WPPluginFrameWorkConfig class
+	 * 
+	 * By modulising your plugin, then creating a module class file and
+	 * extending @see WPPluginFrameWorkConfig class it will be easier to access 
+	 * front and admin functionality. Using a nameing scheme and giving view 
+	 * files, javascript and css files the same name they are automatically 
+	 * hooked up to your class.
+	 * 
+	 * By keeping the framework as a wrapper around your plugin this allows your
+	 * code to be in full control only use what you need from the framework.
+	 * 
+	 * -----------
+	 * JavaScripts
+	 * -----------
+	 * The class will automatically try to load:
+	 * public_html/js/${module}.js
+	 * by default. If this is not there then it will try to load:
+	 * public_html/js/${module}.min.js
+	 * 
+	 * 3rd party scrips are registered using the config class in the index.php
+	 * file to allow registering of 3rd party scripts plugin wide. To register a
+	 * 3rd party script use:
+	 * $config->third_party['scripts'] = array( handle=>src )
+	 * 
+	 * Dependencies can be loaded by the child class in the __construct like so:
+	 * $this->scripts = array( 'jquery' );
+	 * 
+	 * @see WPPluginFrameWorkController::load_scripts()
+	 * @see WPPluginFrameWorkConfig::register_3rd_parties()
+	 * ----------------------------------------------------
+	 * 
+	 * @author daithi
+	 * @package cityindex
+	 * @subpackage ci-wp-login
 	*/
 	class WPPluginFrameWorkController{
 
@@ -43,7 +76,7 @@ if(!class_exists("WPPluginFrameWorkController")):
 		* @param string $plugin_url The plugin url
 		*/
 		function __construct( $class=false ){
-
+			
 			if($class==false) return;
 
 			//set default fields
@@ -152,7 +185,7 @@ if(!class_exists("WPPluginFrameWorkController")):
 		* @return void
 		*/
 		public function get_page() {
-
+			
 			//vars
 			$this->html = file_get_contents("{$this->config->plugin_dir}/public_html/{$this->class_name}.php");
 
@@ -162,7 +195,7 @@ if(!class_exists("WPPluginFrameWorkController")):
 			$this->shortcodes['errors'] = $this->get_errors();
 			$this->shortcodes['messages'] = $this->get_messages();
 
-			$this->set_shortcodes();
+			$this->set_shortcodes();			
 			$this->load_scripts();
 			$this->load_styles();
 
@@ -255,15 +288,31 @@ if(!class_exists("WPPluginFrameWorkController")):
 		}
 
 		/**
-		* Loads javascript files
-		* 
-		* @return void 
+		 * Loads javascript files.
+		 * 
+		 * Will look for {$module}.js in public/js folder by default. If not
+		 * found will look for the {$module}.min.js in the same folder.
+		 * 
+		 * @return void 
 		*/
 		private function load_scripts() {
-
-			if(!file_exists("{$this->config->plugin_dir}/public_html/js/{$this->class_name}.min.js")) return;
-			wp_register_script($this->class_name, "{$this->config->plugin_url}/public_html/js/{$this->class_name}.min.js", $this->script_deps);
-			wp_enqueue_script( $this->class_name );
+			
+			//vars
+			$js_orig = "public_html/js/{$this->class_name}.js";
+			$js_min = "public_html/js/{$this->class_name}.min.js";
+			$js = false;
+			
+			//check if js file found (priority to $js_orig)
+			if(@file_exists("{$this->config->plugin_dir}/{$js_orig}")) 
+				$js=$js_orig;
+			elseif(@file_exists("{$this->config->plugin_dir}/{$js_min}"))
+				$js=$js_min;
+			
+			//if js file found
+			if($js){
+				wp_register_script($this->class_name, "{$this->config->plugin_url}/{$js}", $this->script_deps);
+				wp_enqueue_script( $this->class_name );
+			}
 		}
 
 		/**
@@ -279,6 +328,7 @@ if(!class_exists("WPPluginFrameWorkController")):
 
 			//look for class specific style
 			if(!file_exists("{$this->config->plugin_dir}/public_html/css/{$this->class_name}.css")) return;
+
 			wp_register_style($this->class_name, "{$this->config->plugin_url}/public_html/css/{$this->class_name}.css", $this->style_deps);
 			wp_enqueue_style( $this->class_name );
 		}

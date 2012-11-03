@@ -184,9 +184,7 @@ if(!class_exists("WPPluginFrameWorkConfig")):
 		* @return void
 		*/
 		private function register_3rd_parties(){
-
-			if(!count($this->third_party)) return;
-
+			
 			//register scripts
 			if(count(@$this->third_party['script']))
 				foreach($this->third_party['script'] as $handle => $src)

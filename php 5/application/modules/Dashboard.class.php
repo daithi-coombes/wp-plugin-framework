@@ -24,7 +24,7 @@ class Dashboard extends WPPluginFrameWorkController{
 	 * Adds the dashboard menu. 
 	 */
 	public function dash_menu(){
-		add_menu_page("AutoFlow", "AutoFlow", "manage_options", "autoflow", array(&$this, 'get_page'));
+		add_menu_page("WPF Dashboard", "WPF Dashboard", "manage_options", "wpf-dashboard", array(&$this, 'get_page'));
 	}
 }
 
