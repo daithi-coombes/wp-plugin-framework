@@ -145,4 +145,18 @@ if (!function_exists("url_query_append")){
 			. "?" . http_build_query($query_vars);
 	}
 }
-?>
+
+if(!function_exists("get_current_url")) {
+	
+	/**
+	 * Get the current url including scheme, host and query args
+	 * 
+	 * @return string
+	 */
+	function get_current_url(){
+		$http = 'http';
+		if($_SERVER["HTTPS"] == "on")
+			$http .= "s";
+		return $http."://".$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+	}
+}
