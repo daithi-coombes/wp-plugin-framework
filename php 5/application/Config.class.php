@@ -3,6 +3,11 @@
 if(!class_exists("WPPluginFrameWorkConfig")):
 	/**
 	* Class description 
+	 * 
+	 * @todo allow plugins define default options structs. This would mean that
+	 * they could reset all their options in wp_options as their developing.
+	 * Changing the struct defined in the bootstrap and setting a flag shoudl
+	 * clear or merge old options (depending on flag)
 	*/
 	class WPPluginFrameWorkConfig{
 
